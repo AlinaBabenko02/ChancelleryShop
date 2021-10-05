@@ -14,7 +14,9 @@ namespace ChancelleryShop
 
         public int ReceiptId { get; set; }
         public DateTime ReceiptDate { get; set; }
+        public int ShopId { get; set; }
 
+        public virtual Shop Shop { get; set; }
         public virtual ICollection<ProductToReceipt> ProductToReceipts { get; set; }
     }
 }

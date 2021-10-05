@@ -10,7 +10,6 @@ namespace ChancelleryShop
     {
         public ChancelleryContext()
         {
-            Database.EnsureCreated();
         }
 
         public ChancelleryContext(DbContextOptions<ChancelleryContext> options)
@@ -22,13 +21,14 @@ namespace ChancelleryShop
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductToReceipt> ProductToReceipts { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
+        public virtual DbSet<Shop> Shops { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=VLADM23\\CYCXYZSERVER;Database=Chancellery;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=vladm23\\cycxyzserver;Database=Chancellery;Trusted_Connection=True;");
             }
         }
 
@@ -79,6 +79,22 @@ namespace ChancelleryShop
                     .HasForeignKey(d => d.ReceiptId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ProductTo__Recei__3F466844");
+            });
+
+            modelBuilder.Entity<Receipt>(entity =>
+            {
+                entity.HasOne(d => d.Shop)
+                    .WithMany(p => p.Receipts)
+                    .HasForeignKey(d => d.ShopId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Receipts_ShopId_dskjl");
+            });
+
+            modelBuilder.Entity<Shop>(entity =>
+            {
+                entity.Property(e => e.ShopAdress).IsRequired();
+
+                entity.Property(e => e.ShopCity).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);

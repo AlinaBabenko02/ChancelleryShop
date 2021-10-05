@@ -21,7 +21,8 @@ namespace ChancelleryShop.Controllers
         // GET: Receipts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Receipts.ToListAsync());
+            var chancelleryContext = _context.Receipts.Include(r => r.Shop);
+            return View(await chancelleryContext.ToListAsync());
         }
 
         // GET: Receipts/Details/5
@@ -33,6 +34,7 @@ namespace ChancelleryShop.Controllers
             }
 
             var receipt = await _context.Receipts
+                .Include(r => r.Shop)
                 .FirstOrDefaultAsync(m => m.ReceiptId == id);
             if (receipt == null)
             {
@@ -45,6 +47,7 @@ namespace ChancelleryShop.Controllers
         // GET: Receipts/Create
         public IActionResult Create()
         {
+            ViewData["ShopId"] = new SelectList(_context.Shops, "ShopId", "ShopAdress");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace ChancelleryShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReceiptId,ReceiptDate")] Receipt receipt)
+        public async Task<IActionResult> Create([Bind("ReceiptId,ReceiptDate,ShopId")] Receipt receipt)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace ChancelleryShop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ShopId"] = new SelectList(_context.Shops, "ShopId", "ShopAdress", receipt.ShopId);
             return View(receipt);
         }
 
@@ -77,6 +81,7 @@ namespace ChancelleryShop.Controllers
             {
                 return NotFound();
             }
+            ViewData["ShopId"] = new SelectList(_context.Shops, "ShopId", "ShopAdress", receipt.ShopId);
             return View(receipt);
         }
 
@@ -85,7 +90,7 @@ namespace ChancelleryShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReceiptId,ReceiptDate")] Receipt receipt)
+        public async Task<IActionResult> Edit(int id, [Bind("ReceiptId,ReceiptDate,ShopId")] Receipt receipt)
         {
             if (id != receipt.ReceiptId)
             {
@@ -112,6 +117,7 @@ namespace ChancelleryShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ShopId"] = new SelectList(_context.Shops, "ShopId", "ShopAdress", receipt.ShopId);
             return View(receipt);
         }
 
@@ -124,6 +130,7 @@ namespace ChancelleryShop.Controllers
             }
 
             var receipt = await _context.Receipts
+                .Include(r => r.Shop)
                 .FirstOrDefaultAsync(m => m.ReceiptId == id);
             if (receipt == null)
             {
