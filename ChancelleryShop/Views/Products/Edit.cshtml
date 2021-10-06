@@ -3,10 +3,13 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div>
+    <img class="back" src="https://images.clipartlogo.com/files/images/43/437274/arrow-blue-left-clip-art_f.jpg" />
+    <a class="buttons" asp-action="Index">Назад</a>
+</div>
+<h1 class="important">Изменить</h1>
 
-<h1>Edit</h1>
-
-<h4>Product</h4>
+<h4 class="important">Товар</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,39 +17,40 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
+                <label class="important" class="control-label">Название товара</label>
                 <input asp-for="ProductName" class="form-control" />
                 <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductImage" class="control-label"></label>
+                <label class="important" class="control-label">Фото</label>
                 <input asp-for="ProductImage" class="form-control" />
                 <span asp-validation-for="ProductImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductDescription" class="control-label"></label>
+                <label class="important" class="control-label">Цена</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="important" class="control-label">Категория</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="important" class="control-label">Описание</label>
                 <input asp-for="ProductDescription" class="form-control" />
                 <span asp-validation-for="ProductDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <img class="back" src="https://images.clipartlogo.com/files/images/43/437274/arrow-blue-left-clip-art_f.jpg" />
+    <a class="buttons" asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

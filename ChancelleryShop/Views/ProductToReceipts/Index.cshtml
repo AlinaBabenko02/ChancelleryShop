@@ -4,22 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="important text-center">Покупка товаров</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="text-center" style="font-weight:bold;">
+    <a asp-action="Create">Добавить покупку</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="important">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                Чек
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                Товар
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Receipt)
+                Количество
             </th>
             <th></th>
         </tr>
@@ -28,18 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductImage)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Receipt.ReceiptId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductToReceiptId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductToReceiptId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductToReceiptId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductToReceiptId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductToReceiptId">Детально</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductToReceiptId">Удалить</a>
             </td>
         </tr>
 }

@@ -4,38 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="important text-center">Чеки</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="text-center" style="font-weight:bold;">
+    <a asp-action="Create">Добавить</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiptDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shop)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiptDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shop.ShopAdress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ReceiptId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ReceiptId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ReceiptId">Delete</a>
-            </td>
-        </tr>
+        <div class="receipt">
+            <h4 class="important text-center">@Html.DisplayFor(modelItem => item.ReceiptId)</h4>
+            <div style="padding:5px;">@Html.DisplayFor(modelItem => item.ReceiptDate)</div>
+            <figure>
+                <img style="width: 42px; height: 42px; float: left; padding:5px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxrAW0FGQ7tqauwFZYmEMZCs0icAXqrB0CQYxIz4pm1M9jQDGpKuCOF_Kl2P8QT5KfkMs&usqp=CAU"/>
+                <figcaption>
+                    <div style="padding:5px 5px 0px 5px; font-weight:bold">@Html.DisplayFor(modelItem => item.Shop.ShopCity)</div>
+                    <div style="padding:0 5px 5px 5px;">@Html.DisplayFor(modelItem => item.Shop.ShopAdress)</div>
+                </figcaption>
+            </figure>
+            <div>
+                <a class="text-center" style=" color: #940036; padding: 5px; font-weight:bold" asp-action="Details" asp-route-id="@item.ReceiptId">Детально</a>
+            </div>
+            <div class="text-center rectangleButtons" style="width:275px; margin: 0 0 0 -9px">
+                <a id="edit" asp-action="Edit" asp-route-id="@item.ReceiptId">Изменить</a>
+                <a id="delete" asp-action="Delete" asp-route-id="@item.ReceiptId">Удалить</a>
+            </div>
+        </div>
 }
     </tbody>
 </table>

@@ -3,28 +3,26 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
 <div>
-    <h4>Receipt</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReceiptDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReceiptDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Shop)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Shop.ShopAdress)
-        </dd>
-    </dl>
+    <img class="back" src="https://images.clipartlogo.com/files/images/43/437274/arrow-blue-left-clip-art_f.jpg" />
+    <a class="buttons" asp-action="Index">Назад</a>
 </div>
+<div class="receipt" style="float:none; height:170px;">
+    <h4 class="important text-center">@Html.DisplayFor(model => model.ReceiptId)</h4>
+    <div style="padding:5px;">@Html.DisplayFor(model => model.ReceiptDate)</div>
+    <figure>
+        <img style="width: 42px; height: 42px; float: left; padding:5px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxrAW0FGQ7tqauwFZYmEMZCs0icAXqrB0CQYxIz4pm1M9jQDGpKuCOF_Kl2P8QT5KfkMs&usqp=CAU" />
+        <figcaption>
+            <div style="padding:5px 5px 0px 5px; font-weight:bold">@Html.DisplayFor(model => model.Shop.ShopCity)</div>
+            <div style="padding:0 5px 5px 5px;">@Html.DisplayFor(model => model.Shop.ShopAdress)</div>
+        </figcaption>
+    </figure>
+</div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ReceiptId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="buttons" asp-action="Edit" asp-route-id="@Model.ReceiptId">Изменить</a> 
+    <div>
+        <img class="back" src="https://images.clipartlogo.com/files/images/43/437274/arrow-blue-left-clip-art_f.jpg" />
+        <a class="buttons" asp-action="Index">Назад</a>
+    </div>
 </div>
