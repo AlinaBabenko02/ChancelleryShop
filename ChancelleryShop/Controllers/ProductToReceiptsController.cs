@@ -48,7 +48,7 @@ namespace ChancelleryShop.Controllers
         // GET: ProductToReceipts/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductImage");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
             ViewData["ReceiptId"] = new SelectList(_context.Receipts, "ReceiptId", "ReceiptId");
             return View();
         }
@@ -66,7 +66,7 @@ namespace ChancelleryShop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductImage", productToReceipt.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", productToReceipt.ProductId);
             ViewData["ReceiptId"] = new SelectList(_context.Receipts, "ReceiptId", "ReceiptId", productToReceipt.ReceiptId);
             return View(productToReceipt);
         }
@@ -84,7 +84,7 @@ namespace ChancelleryShop.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductImage", productToReceipt.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", productToReceipt.ProductId);
             ViewData["ReceiptId"] = new SelectList(_context.Receipts, "ReceiptId", "ReceiptId", productToReceipt.ReceiptId);
             return View(productToReceipt);
         }
@@ -121,7 +121,7 @@ namespace ChancelleryShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductImage", productToReceipt.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", productToReceipt.ProductId);
             ViewData["ReceiptId"] = new SelectList(_context.Receipts, "ReceiptId", "ReceiptId", productToReceipt.ReceiptId);
             return View(productToReceipt);
         }
