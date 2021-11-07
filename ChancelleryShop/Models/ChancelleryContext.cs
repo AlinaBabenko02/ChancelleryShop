@@ -7,12 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace ChancelleryShop
 {
     public partial class ChancelleryContext : DbContext
-    {
-        public ChancelleryContext()
-        {
-            Database.EnsureCreated();
-        }
-
+    { 
         public ChancelleryContext(DbContextOptions<ChancelleryContext> options)
             : base(options)
         {
@@ -88,6 +83,10 @@ namespace ChancelleryShop
                 entity.Property(e => e.ShopAdress).IsRequired();
 
                 entity.Property(e => e.ShopCity).IsRequired();
+
+                entity.Property(e => e.Lat).IsRequired();
+
+                entity.Property(e => e.Long).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);

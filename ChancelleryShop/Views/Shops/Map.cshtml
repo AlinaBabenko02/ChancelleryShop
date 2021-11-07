@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ChancelleryShop.Shop>
+
+<head>
+    <meta charset="utf-8">
+    <title>Add a default marker to a web map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY3ljeHl6IiwiYSI6ImNrdnAzNWJwdDBrNWEzMWtnMW9rMTVvaHkifQ.wO7SDxMr3XLD4WFU95adBg';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [12.550343, 55.665957],
+            zoom: 8
+        });
+
+        const makeMarker = (a, b) => {
+            const marker = new mapboxgl.Marker({ color: "red" })
+                .setLngLat([a, b])
+                .addTo(map);
+        }
+    </script>
+    @foreach(var shop in Model)
+    {
+        <script>
+            makeMarker(@shop.Lat, @shop.Long)
+        </script>
+    } 
+
+</body>

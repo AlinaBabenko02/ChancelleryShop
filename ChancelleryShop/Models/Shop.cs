@@ -15,6 +15,8 @@ namespace ChancelleryShop
         public int ShopId { get; set; }
         public string ShopAdress { get; set; }
         public string ShopCity { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
 
         public virtual ICollection<Receipt> Receipts { get; set; }
     }
