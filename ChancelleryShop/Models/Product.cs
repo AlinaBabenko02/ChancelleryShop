@@ -22,4 +22,15 @@ namespace ChancelleryShop
         public virtual Category Category { get; set; }
         public virtual ICollection<ProductToReceipt> ProductToReceipts { get; set; }
     }
+
+    public class ProductCatByName
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public int Price { get; set; }
+        public String CategoryName { get; set; }
+        public string ProductImage { get; set; }
+        public string ProductDescription { get; set; }
+
+    }
 }
