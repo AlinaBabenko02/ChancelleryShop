@@ -17,7 +17,13 @@ namespace ChancelleryShop.Controllers
         {
             _context = context;
         }
+        
 
+        public JsonResult GetSearchValue(string search)
+        {
+            var res = _context.Categories.Where(x => x.CategoryName.Contains(search)).Select(x => new { id = x.CategoryId, name = x.CategoryName }).ToList();
+            return new JsonResult(res);
+        }
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -56,9 +62,21 @@ namespace ChancelleryShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,Price,CategoryId,ProductImage,ProductDescription")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,Price,CategoryName,ProductImage,ProductDescription")] ProductCatByName productCat)
         {
-            if (ModelState.IsValid)
+            var cat = _context.Categories.Where(x => x.CategoryName == productCat.CategoryName).FirstOrDefault();
+            int catId = -1;
+            if (cat != null) catId = cat.CategoryId;
+            Product product = new Product()
+            {
+                ProductId = productCat.ProductId,
+                Price = productCat.Price,
+                CategoryId = catId,
+                ProductName = productCat.ProductName,
+                ProductImage = productCat.ProductImage,
+                ProductDescription = productCat.ProductDescription
+            };
+            if (ModelState.IsValid && catId != -1)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
