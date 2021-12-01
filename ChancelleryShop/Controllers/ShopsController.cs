@@ -24,6 +24,11 @@ namespace ChancelleryShop.Controllers
             return View(await _context.Shops.ToListAsync());
         }
 
+        public async Task<IActionResult> Map()
+        {
+            return View(await _context.Shops.ToListAsync());
+        }
+
         // GET: Shops/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,7 +58,7 @@ namespace ChancelleryShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShopId,ShopAdress,ShopCity")] Shop shop)
+        public async Task<IActionResult> Create([Bind("ShopId,ShopAdress,ShopCity, Lat, Long")] Shop shop)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +90,7 @@ namespace ChancelleryShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShopId,ShopAdress,ShopCity")] Shop shop)
+        public async Task<IActionResult> Edit(int id, [Bind("ShopId,ShopAdress,ShopCity, Lat, Long")] Shop shop)
         {
             if (id != shop.ShopId)
             {

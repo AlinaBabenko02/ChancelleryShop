@@ -7,12 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace ChancelleryShop
 {
     public partial class ChancelleryContext : DbContext
-    {
-        public ChancelleryContext()
-        {
-            Database.EnsureCreated();
-        }
-
+    { 
         public ChancelleryContext(DbContextOptions<ChancelleryContext> options)
             : base(options)
         {
@@ -24,15 +19,6 @@ namespace ChancelleryShop
         public virtual DbSet<ProductToReceipt> ProductToReceipts { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-1LJ593T\\SQLEXPRESS;Database=Chancellery;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,6 +83,10 @@ namespace ChancelleryShop
                 entity.Property(e => e.ShopAdress).IsRequired();
 
                 entity.Property(e => e.ShopCity).IsRequired();
+
+                entity.Property(e => e.Lat).IsRequired();
+
+                entity.Property(e => e.Long).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);
